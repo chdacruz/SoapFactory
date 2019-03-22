@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1072963914517",
+    "firebase_url": "https://soap-factory-1f72d.firebaseio.com",
+    "project_id": "soap-factory-1f72d",
+    "storage_bucket": "soap-factory-1f72d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072963914517:android:89d5e9b68bfa703b",
+        "android_client_info": {
+          "package_name": "com.example.soapfactory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072963914517-dq2u2bioh4qmj09c8na8dde0rubckqhq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soapfactory",
+            "certificate_hash": "16e9a8a541f62ed8687eefda1f27e43a1d6fdc0e"
+          }
+        },
+        {
+          "client_id": "1072963914517-drrmfmf7m3subvkhr9j889mi6pj0g112.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASOn8JXJmyFZk9EEPAQyzq24TsFzgjGMk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072963914517-drrmfmf7m3subvkhr9j889mi6pj0g112.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
