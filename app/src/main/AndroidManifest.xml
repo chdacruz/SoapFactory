@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.soapfactory">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Recipes"
-            android:label="@string/title_activity_recipes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ProdRegistration" />
+            android:name=".HomePage"
+            android:label="@string/home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Recipes" /> <!-- <activity android:name=".HomePage" /> -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

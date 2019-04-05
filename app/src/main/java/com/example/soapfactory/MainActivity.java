@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Open next activity
-        Intent intent = new Intent(this, ProdRegistration.class);
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 }
