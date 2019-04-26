@@ -1,24 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageView_ProdRegist"
+        android:layout_width="118dp"
+        android:layout_height="113dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:src="@mipmap/ic_bucket"
+        android:contentDescription="@string/product_registration_image"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtView_ProdName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/product_name"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextBlack"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editTxt_ProdName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/edtproduct_name"
+            android:ems="10"
+            android:inputType="text"
+            android:importantForAutofill="no" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtView_ProdType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/product_type"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextBlack"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:id="@+id/spinner_ProdType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtView_Price"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/product_price"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextBlack"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/editTxt_ProdPrice"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/_0_0"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtView_Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/description"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextBlack"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+
+        <EditText
+            android:id="@+id/editTxt_Description"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:autofillHints=""
+            android:hint="@string/product_description"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:layout_gravity="center"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Product Registration Fragment"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/btnInsert"
+        android:layout_gravity="center"
+        android:background="@drawable/button_round_border"
+        android:textColor="@color/colorTextWhite"
+        android:text="@string/insert"/>
 
-</android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="20dp">
+
+    </View>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/vector_2"
+        android:layout_gravity="bottom">
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

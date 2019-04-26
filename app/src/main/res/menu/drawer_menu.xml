@@ -18,6 +18,11 @@
             android:id="@+id/nav_prod_registration"
             android:icon="@drawable/ic_prod_regist"
             android:title="Product Registration" />
+
+        <item
+            android:id="@+id/nav_fab_instructions"
+            android:icon="@drawable/ic_instructions"
+            android:title="Soap Making Instructions"/>
     </group>
 
     <item android:title="Communicate">

@@ -3,7 +3,6 @@ package com.example.soapfactory;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,6 +24,8 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
 
     //Drawer menu
     private DrawerLayout drawer;
+    TextView userEmail;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,49 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
+
+
+        //Put current user's e-mail on side bar menu
+        //For some reason the app doesn't load after login if this code is uncommented
+        /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null) {
+            TextView emailTxt = findViewById(R.id.emailTextView);
+            String email = user.getEmail();
+            emailTxt.setText("" + email);
+        }*/
+
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+       /* final FirebaseUser mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View navHeaderView = navigationView.getHeaderView(0);
+
+        userEmail = (TextView) navHeaderView.findViewById(R.id.emailTextView);
+
+        FirebaseDatabase.getInstance().getReference().child(mFirebaseUser.getEmail().replace(".", ","))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if( dataSnapshot.getValue() != null){
+                            //Users users = dataSnapshot.getValue(Users.class);
+                            PostData postData = dataSnapshot.getValue(PostData.class);
+
+                            //Change to e-mail later
+                            //userEmail.setText(postData.getName());
+                            //userEmail.setText(mFirebaseUser.getEmail().toString());
+                            userEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });*/
+
+
+
         /* Remove everything until corrected
         btnSignOut = findViewById(R.id.btnSign_Out);
         btnSignOut.setOnClickListener(new View.OnClickListener() {
@@ -70,31 +116,12 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        //Spinner Soap
-        Spinner spnSoap = findViewById(R.id.spnSoapType);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.soap_types, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnSoap.setAdapter(adapter);
-        spnSoap.setOnItemSelectedListener(this);
-
-        //Spinner Fat
-        Spinner spnFat = findViewById(R.id.spnFatType);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.fat_types, android.R.layout.simple_spinner_item);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnFat.setAdapter(adapter1);
-        spnFat.setOnItemSelectedListener(this);
-
-        //Scent
-        Spinner spnScent = findViewById(R.id.spnScent);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.scent, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnScent.setAdapter(adapter2);
-        spnScent.setOnItemSelectedListener(this);
-
         End removing everything*/
 
 
     }
+
+
 
     //Implementing method to call fragments
     @Override
@@ -112,6 +139,11 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Prod_RegistrationFragment()).commit();
                 break;
+            case R.id.nav_fab_instructions:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Fab_InstructionsFragment()).commit();
+                break;
+
             case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;

@@ -18,11 +18,13 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Side Bar Menu"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textColor="@color/colorTextWhite" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="soapfactory@gmail.com" />
+        android:text="soapfactory@gmail.com"
+        android:id="@+id/emailTextView"
+        android:textColor="@color/colorTextWhite"/>
 
 </LinearLayout>
