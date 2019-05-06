@@ -43,7 +43,7 @@ public class Prod_RegistrationFragment extends Fragment {
 
         //Code to initiate the spinner
         String [] prodTypes = {"Oil", "Fat", "Scent"};
-        //spnProdType = v.findViewById(R.id.spinner_ProdType);
+        spnProdType = v.findViewById(R.id.spinner_ProdType);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, prodTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnProdType.setAdapter(adapter);

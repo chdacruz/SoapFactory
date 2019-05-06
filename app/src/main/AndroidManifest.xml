@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomePage"
+            android:name=".SideMenuAdmin"
             android:label="@string/home_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Recipes" /> <!-- <activity android:name=".HomePage" /> -->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".RegisterUser"
+            android:label="User Registration" />
+
+        <activity
+            android:name=".SideMenuUser"
+            android:label="User Menu"/>
+
     </application>
 
 </manifest>

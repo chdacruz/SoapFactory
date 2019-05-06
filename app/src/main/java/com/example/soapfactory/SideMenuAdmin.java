@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomePage extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     //Sign Out Button
     //private Button btnSignOut;
@@ -30,14 +30,14 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_sidemenu_admin);
 
 
         //Side bar code
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(R.id.homePage);
+        drawer = findViewById(R.id.sideMenuAdmin);
 
         //Creates reference to Navigation View to enable click on events
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -52,8 +52,8 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
         if(savedInstanceState == null) {
             //Open a fragment on start
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+                    new HomeFragmentAdmin()).commit();
+            navigationView.setCheckedItem(R.id.nav_home_admin);
         }
 
 
@@ -106,7 +106,7 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
             public void onClick(View v) {
                 //Logout
                 AuthUI.getInstance()
-                        .signOut(HomePage.this)
+                        .signOut(SideMenuAdmin.this)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -127,29 +127,30 @@ public class HomePage extends AppCompatActivity implements AdapterView.OnItemSel
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
-            case R.id.nav_home:
+            case R.id.nav_home_admin:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        new HomeFragmentAdmin()).commit();
                 break;
-            case R.id.nav_profile:
+            case R.id.nav_profile_admin:
+                //Here the profile fragment is the same used for user
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
                 break;
-            case R.id.nav_prod_registration:
+            case R.id.nav_prod_registration_admin:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Prod_RegistrationFragment()).commit();
                 break;
-            case R.id.nav_fab_instructions:
+            case R.id.nav_fab_instructions_admin:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Fab_InstructionsFragment()).commit();
                 break;
 
-            case R.id.nav_share:
+            /*case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_send:
                 Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
         }
 
         //Close Drawer

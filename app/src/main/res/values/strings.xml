@@ -41,6 +41,9 @@
     </string-array>
 
 
+    <string name="admin">carloshencrus08@gmail.com</string>
+
+
     <string name="title_activity_recipes">Recipes</string>
     <string name="sign_out">Sign out</string>
     <string name="sign_string_sign_out">Sign @string/sign_out</string>

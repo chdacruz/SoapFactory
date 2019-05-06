@@ -41,7 +41,7 @@
         android:padding="20dp">
 
         <EditText
-            android:id="@+id/txtUsername"
+            android:id="@+id/txtUsername_Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -59,7 +59,7 @@
             android:layout_weight="0" />
 
         <EditText
-            android:id="@+id/txtPassword"
+            android:id="@+id/txtPassword_Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -71,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtUsername"
+            app:layout_constraintTop_toBottomOf="@+id/txtUsername_Login"
             app:layout_constraintVertical_bias="0.099" />
 
         <View
@@ -107,7 +107,9 @@
             android:layout_height="wrap_content"
             android:text=" Register"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick_txtRegister"/>
 
     </LinearLayout>
 

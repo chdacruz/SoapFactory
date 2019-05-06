@@ -1,11 +1,10 @@
 package com.example.soapfactory;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     //For login with e-mail
     TextView txtUserEmail, txtUserPassword;
 
-    //FirebaseDatabase firebaseDatabase;
+    FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
     @Override
@@ -51,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Linking variables to TextViews
-        txtUserEmail = findViewById(R.id.txtUsername);
-        txtUserPassword = findViewById(R.id.txtPassword);
+        txtUserEmail = findViewById(R.id.txtUsername_Login);
+        txtUserPassword = findViewById(R.id.txtPassword_Login);
 
         //Init providers
         providers = Arrays.asList(
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         providerFacebook = Arrays.asList( new AuthUI.IdpConfig.FacebookBuilder().build() );
         providerGoogle = Arrays.asList(new AuthUI.IdpConfig.GoogleBuilder().build() );
 
-        //showSignInOptions();
+        //Email sign-in();
         btnSignInEmail = findViewById(R.id.btnSign_In);
         btnSignInEmail.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -101,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
         //loadUserInformation();
     }
 
+    //Register TextView
+    public void onClick_txtRegister(View view) {
+        Intent intentRegister = new Intent(this, RegisterUser.class);
+        startActivity(intentRegister);
+    }
+
     //Display e-mail
     /*private void loadUserInformation() {
         FirebaseUser user = mAuth.getCurrentUser();
@@ -127,12 +132,29 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    //Only for login
+    //Here's the problem. You're comparing the e-mail login with the firebase login, but you're not logging with firebase,
+    //so it just get's the last logged user
     private void emailSign(){
         String userEmail = txtUserEmail.getText().toString();
         String userPassword = txtUserPassword.getText().toString();
 
         Users users = new Users(userEmail, userPassword);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(userEmail.equals(user.getEmail())){
+            Intent intentAdmin = new Intent(this, SideMenuAdmin.class);
+            startActivity(intentAdmin);
+        }
+
+        else{
+            Intent intentUser = new Intent(this, SideMenuUser.class);
+            startActivity(intentUser);
+        }
+
+
+        //Should save the user to the database, which is not happening
         databaseReference.child("users").setValue(users);
     }
 
@@ -147,19 +169,32 @@ public class MainActivity extends AppCompatActivity {
         );
     }*/
 
+    private void admStartup(){
+        Intent intentAdmin = new Intent(this, SideMenuAdmin.class);
+        startActivity(intentAdmin);
+    }
+
+    private void userStartup(){
+        Intent intentUser = new Intent(this, SideMenuUser.class);
+        startActivity(intentUser);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         if(requestCode == RESULT_OK){
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if(resultCode == RESULT_OK){
                 //Get user
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 //Show e-mail on Toast
-                Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
                 //Set Button Signout
                     //btnSignOut.setEnabled(true);
 
@@ -169,8 +204,112 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
+        //Open different intents for different users
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(" Admins");
+
+        // Read from the database
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    if(ds.getValue(String.class).equals(user.getEmail())){
+                        //Open activity
+                        //startActivity(intentAdmin);
+                        admStartup();
+                    }
+                    else{
+                        //startActivity(intentUser);
+                        userStartup();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Cruz" , "Failed to read value.", error.toException());
+            }
+        });
+
         //Open next activity
-        Intent intent = new Intent(this, HomePage.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, SideMenuAdmin.class);
+        //startActivity(intent);
+
+        //Check if the user is an administrator
+
+
+        //*****************************************************************************************
+        /*
+        String currentUser = getString(R.string.admin);
+
+        if(currentUser.equals(user.getEmail())){
+            Intent intentAdmin = new Intent(this, SideMenuAdmin.class);
+            startActivity(intentAdmin);
+        }
+
+        else{
+            Intent intentUser = new Intent(this, SideMenuUser.class);
+            startActivity(intentUser);
+        }
+
+        *///*****************************************************************************************
     }
+
+    /*public boolean isAdministrator(){
+
+        boolean isAdmin = false;
+        String email;
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(" Admins");
+
+        // Read from the database
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d("Cruz", "Value is: " + value);
+
+
+                //Current user
+                //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Cruz", "Failed to read value.", error.toException());
+            }
+        });
+
+        return true;
+
+    }*/
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

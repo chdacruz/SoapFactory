@@ -5,37 +5,24 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_home_admin"
             android:icon="@drawable/ic_home"
             android:title="Soap Factory" />
 
         <item
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_profile_admin"
             android:icon="@drawable/ic_profile"
             android:title="Profile" />
 
         <item
-            android:id="@+id/nav_prod_registration"
+            android:id="@+id/nav_prod_registration_admin"
             android:icon="@drawable/ic_prod_regist"
             android:title="Product Registration" />
 
         <item
-            android:id="@+id/nav_fab_instructions"
+            android:id="@+id/nav_fab_instructions_admin"
             android:icon="@drawable/ic_instructions"
-            android:title="Soap Making Instructions"/>
+            android:title="Edit Soap Making Instructions"/>
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
 </menu>

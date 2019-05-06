@@ -16,7 +16,6 @@
         android:src="@mipmap/ic_bucket"
         android:contentDescription="@string/product_registration_image"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -77,6 +76,7 @@
             android:id="@+id/spinner_ProdType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
@@ -172,6 +172,7 @@
 
 
     </LinearLayout>
+
 
 
 </LinearLayout>
