@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     //For login with e-mail
     TextView txtUserEmail, txtUserPassword;
 
+    //For register function
+    TextView txtRegister;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Check if this is necessary
+        //databaseReference = FirebaseDatabase.getInstance().getReference();
 
         //Linking variables to TextViews
         txtUserEmail = findViewById(R.id.txtUsername_Login);
@@ -96,14 +102,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //Open register activity
+        txtRegister = findViewById(R.id.txtRegister);
+        txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentRegister = new Intent(MainActivity.this, RegisterUser.class);
+                startActivity(intentRegister);
+            }
+        });
+
+
         //Display e-mail
         //loadUserInformation();
     }
 
     //Register TextView
+    /*
+    For this to work you have to put on the xml design file
+    android:onClick="onClick_txtRegister"
+     */
     public void onClick_txtRegister(View view) {
-        Intent intentRegister = new Intent(this, RegisterUser.class);
+        Intent intentRegister = new Intent(MainActivity.this, RegisterUser.class);
         startActivity(intentRegister);
+
     }
 
     //Display e-mail
@@ -139,11 +161,23 @@ public class MainActivity extends AppCompatActivity {
         String userEmail = txtUserEmail.getText().toString();
         String userPassword = txtUserPassword.getText().toString();
 
+
         Users users = new Users(userEmail, userPassword);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(userEmail.equals(user.getEmail())){
+        //Insert this here
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        //Should save the user to the database, which is not happening
+        databaseReference.child("users").setValue(users);
+
+
+        Intent intentAdmin = new Intent(this, SideMenuAdmin.class);
+        startActivity(intentAdmin);
+
+
+        /*if(userEmail.equals(user.getEmail())){
             Intent intentAdmin = new Intent(this, SideMenuAdmin.class);
             startActivity(intentAdmin);
         }
@@ -151,11 +185,10 @@ public class MainActivity extends AppCompatActivity {
         else{
             Intent intentUser = new Intent(this, SideMenuUser.class);
             startActivity(intentUser);
-        }
+        }*/
 
 
-        //Should save the user to the database, which is not happening
-        databaseReference.child("users").setValue(users);
+
     }
 
     /*private void showSignInOptions() {
