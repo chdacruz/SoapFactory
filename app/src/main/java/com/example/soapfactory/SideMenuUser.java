@@ -1,5 +1,6 @@
 package com.example.soapfactory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class SideMenuUser extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -81,12 +86,29 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
             case R.id.nav_send_user:
                 Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
                 break;
+
+            case R.id.nav_sign_out_user:
+                signOut();
+                break;
         }
 
         //Close Drawer
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void signOut(){
+
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        startActivity(new Intent(SideMenuUser.this, MainActivity.class));
+                        finish();
+                    }
+                });
     }
 
     //Side bar code (in case the back button is pressed)

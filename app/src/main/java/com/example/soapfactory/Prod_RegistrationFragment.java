@@ -19,9 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Prod_RegistrationFragment extends Fragment {
 
     //Variables to save the data to the database
-    EditText edt_prodName, edt_prodPrice, edt_description;
-    Spinner spnProdType;
-    ImageButton btn_insert;
+    //EditText edt_prodName, edt_prodPrice, edt_description;
+    //Spinner spnProdType;
+    //ImageButton btn_insert;
 
 
     //Firebase
@@ -29,24 +29,37 @@ public class Prod_RegistrationFragment extends Fragment {
     //FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    @Nullable
+    //@Nullable
+    //    @Override
+    //    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //View v = inflater.inflate(R.layout.fragment_prod_registration, container, false);
         View v = inflater.inflate(R.layout.fragment_prod_registration, container, false);
 
-        edt_prodName = v.findViewById(R.id.editTxt_ProdName);
-        edt_prodPrice = v.findViewById(R.id.editTxt_ProdPrice);
-        spnProdType = v.findViewById(R.id.spinner_ProdType);
-        edt_description = v.findViewById(R.id.editTxt_Description);
-        btn_insert = v.findViewById(R.id.btnInsert);
+        /****
+        //edt_prodName = v.findViewById(R.id.editTxt_ProdName);
+        edt_prodName = v.findViewById(R.id.frag_ProdName);
+        //edt_prodPrice = v.findViewById(R.id.editTxt_ProdPrice);
+        edt_prodPrice = v.findViewById(R.id.frag_ProdPrice);
+        //spnProdType = v.findViewById(R.id.spinner_ProdType);
+        //spnProdType = v.findViewById(R.id.frag_spn_ProdType);
+        //edt_description = v.findViewById(R.id.editTxt_Description);
+        edt_description = v.findViewById(R.id.frag_ProdDescription);
+        //btn_insert = v.findViewById(R.id.btnInsert);
+        btn_insert = v.findViewById(R.id.frag_btn_RegisterProduct);
 
+
+
+        Spinner Code
         //Code to initiate the spinner
         String [] prodTypes = {"Oil", "Fat", "Scent"};
-        spnProdType = v.findViewById(R.id.spinner_ProdType);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, prodTypes);
+        //spnProdType = v.findViewById(R.id.spinner_ProdType);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, prodTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnProdType.setAdapter(adapter);
+
 
         //Firebase
 
@@ -61,13 +74,35 @@ public class Prod_RegistrationFragment extends Fragment {
             public void onClick(View v) {
                 insertData();
             }
-        });
+        });*/
 
         //return inflater.inflate(R.layout.fragment_prod_registration, container, false);
         return v;
     }
 
-   private void insertData() {
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        EditText edt_prodName, edt_prodPrice, edt_description;
+        Spinner spnProdType;
+        Button btn_insert;
+
+        // Setup any handles to view objects here
+        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+        //edt_prodName = v.findViewById(R.id.editTxt_ProdName);
+        edt_prodName = view.findViewById(R.id.frag_ProdName);
+        //edt_prodPrice = v.findViewById(R.id.editTxt_ProdPrice);
+        edt_prodPrice = view.findViewById(R.id.frag_ProdPrice);
+        //spnProdType = v.findViewById(R.id.spinner_ProdType);
+        //spnProdType = v.findViewById(R.id.frag_spn_ProdType);
+        //edt_description = v.findViewById(R.id.editTxt_Description);
+        edt_description = view.findViewById(R.id.frag_ProdDescription);
+        //btn_insert = v.findViewById(R.id.btnInsert);
+        btn_insert = view.findViewById(R.id.frag_btn_RegisterProduct);
+    }
+
+
+   /*private void insertData() {
         String prodName = edt_prodName.getText().toString();
         String prodPrice = edt_prodPrice.getText().toString();
         String prodType = spnProdType.getSelectedItem().toString();
@@ -86,5 +121,5 @@ public class Prod_RegistrationFragment extends Fragment {
        edt_prodPrice.setText("");
        edt_description.setText("");
 
-    }
+    }*/
 }

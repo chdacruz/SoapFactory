@@ -15,6 +15,9 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
@@ -145,6 +148,10 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
                         new Fab_InstructionsFragment()).commit();
                 break;
 
+            case R.id.nav_sign_out_admin:
+                signOut();
+                break;
+
             /*case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
@@ -157,6 +164,19 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void signOut(){
+
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        startActivity(new Intent(SideMenuAdmin.this, MainActivity.class));
+                        finish();
+                    }
+                });
     }
 
     //Side bar code (in case the back button is pressed)
