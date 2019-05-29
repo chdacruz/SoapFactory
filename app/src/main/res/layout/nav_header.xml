@@ -9,22 +9,24 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:id="@+id/nav_user_photo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Side Bar Menu"
-        android:textColor="@color/colorTextWhite" />
+        android:textColor="@color/colorTextWhite"
+        android:id="@+id/nav_user_name"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="soapfactory@gmail.com"
-        android:id="@+id/emailTextView"
+        android:id="@+id/nav_user_email"
         android:textColor="@color/colorTextWhite"/>
 
 </LinearLayout>

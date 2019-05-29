@@ -12,13 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +32,8 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
     private DrawerLayout drawer;
     TextView userEmail;
     FirebaseAuth mAuth;
+
+    //FirebaseUser currentUser ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.sideMenuAdmin);
+
+        //currentUser = mAuth.getCurrentUser();
 
         //Creates reference to Navigation View to enable click on events
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -59,70 +66,32 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
             navigationView.setCheckedItem(R.id.nav_home_admin);
         }
 
-
-
-        //Put current user's e-mail on side bar menu
-        //For some reason the app doesn't load after login if this code is uncommented
-        /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
-            TextView emailTxt = findViewById(R.id.emailTextView);
-            String email = user.getEmail();
-            emailTxt.setText("" + email);
-        }*/
-
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-       /* final FirebaseUser mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View navHeaderView = navigationView.getHeaderView(0);
-
-        userEmail = (TextView) navHeaderView.findViewById(R.id.emailTextView);
-
-        FirebaseDatabase.getInstance().getReference().child(mFirebaseUser.getEmail().replace(".", ","))
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if( dataSnapshot.getValue() != null){
-                            //Users users = dataSnapshot.getValue(Users.class);
-                            PostData postData = dataSnapshot.getValue(PostData.class);
-
-                            //Change to e-mail later
-                            //userEmail.setText(postData.getName());
-                            //userEmail.setText(mFirebaseUser.getEmail().toString());
-                            userEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
-
-
-        /* Remove everything until corrected
-        btnSignOut = findViewById(R.id.btnSign_Out);
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Logout
-                AuthUI.getInstance()
-                        .signOut(SideMenuAdmin.this)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                toMainActivity(true);
-                            }
-                        });
-            }
-        });
-
-        End removing everything*/
+        //updateNavHeader();
 
 
     }
+
+    /*public void updateNavHeader() {
+
+        //WHERE IS nav_view?!?!?!?!??!?!?
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = headerView.findViewById(R.id.nav_user_name);
+        TextView navUserMail = headerView.findViewById(R.id.nav_user_email);
+        ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
+
+        navUserMail.setText(currentUser.getEmail());
+        navUsername.setText(currentUser.getDisplayName());
+
+        // now we will use Glide to load user image
+        // first we need to import the library
+
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhoto);
+
+
+
+
+    }*/
 
 
 
@@ -173,7 +142,7 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(SideMenuAdmin.this, MainActivity.class));
+                        startActivity(new Intent(SideMenuAdmin.this, LoginActivity.class));
                         finish();
                     }
                 });
@@ -200,15 +169,5 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-    private void toMainActivity(boolean signed){
-        if(true){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-        else{
-            Toast.makeText(this, "Not logged. Weird error.", Toast.LENGTH_SHORT).show();
-        }
     }
 }

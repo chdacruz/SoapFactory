@@ -35,10 +35,13 @@
     </string-array>
 
     <string-array name="prod_type">
+        <item>Choose Product Type</item>
         <item>Oil</item>
         <item>Fat</item>
         <item>Scent</item>
     </string-array>
+
+    <string name="text_size">16</string>
 
 
     <string name="admin">carloshencrus08@gmail.com</string>

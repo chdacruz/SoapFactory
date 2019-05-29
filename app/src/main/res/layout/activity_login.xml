@@ -4,33 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:orientation="vertical"
-        android:background="@mipmap/vector_1"
-        android:padding="20dp">
-
-        <!-- <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center"
-            android:contentDescription="@string/logo"
-            android:src="@mipmap/vector_1"/> -->
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/logo"
-            android:layout_gravity="center_horizontal"/>
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:background="@color/colorTextWhite">
 
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/logo3"
+                android:scaleType="centerCrop"/>
+
+        </LinearLayout>
 
 
     <LinearLayout
@@ -80,13 +71,27 @@
             android:layout_gravity="center"
             android:layout_weight="0" />
 
-        <Button
-            android:id="@+id/btnSign_In"
-            android:layout_width="171dp"
-            android:layout_height="56dp"
-            android:background="@drawable/button_round_border"
-            android:text="Login"
-            android:textColor="@color/colorTextWhite" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnSign_In"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:background="@drawable/button_round_border"
+                android:text="Login"
+                android:textColor="@color/colorTextWhite" />
+
+            <ProgressBar
+                android:id="@+id/email_login_progress_bar"
+                android:layout_width="171dp"
+                android:layout_height="56dp"
+                style="?android:attr/progressBarStyleLarge"/>
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 
@@ -119,32 +124,62 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+
+        <!--
         <ImageButton
             android:id="@+id/btnSign_In_Facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
+            android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:background="@drawable/com_facebook_button_icon_white"
-            android:src="@mipmap/ic_facebook_round"
-            android:layout_gravity="center"/>
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_facebook_round" />
+            -->
+
+        <!--WHEN THE BUTTON IS CLICKED, THE WIDGET IS CALLED WITH THE
+        .performCLick()
+        METHOD
+        -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/btnSign_In_Facebook_Widget"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/btnSign_In_Facebook"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:background="@mipmap/ic_facebook_round"/>
+
+        </RelativeLayout>
+
+
+
+
 
         <View
-            android:layout_width="25dp"
-            android:layout_height="0dp"
+            android:layout_width="50dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
             android:layout_weight="0" />
 
 
         <ImageButton
             android:id="@+id/btnSign_In_Google"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:background="@drawable/com_facebook_button_icon_white"
             android:src="@mipmap/ic_gmail"
             android:layout_gravity="end"/>
+
 
     </LinearLayout>
 

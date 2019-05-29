@@ -11,16 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".SideMenuAdmin"
-            android:label="@string/home_page"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".SideMenuUser"
-            android:label="User Menu"/>
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +19,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterUser"
-            android:label="User Registration Test"/>
+        <activity
+            android:name=".SideMenuAdmin"
+            android:label="@string/home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SideMenuUser"
+            android:label="User Menu" />
+        <activity android:name=".LoginActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".RegisterUser"
+            android:label="User Registration Test" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.soapfactory;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,32 +13,64 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class SideMenuUser extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     //Drawer menu
     private DrawerLayout drawer;
 
+    //
+    TextView nav_userName;
+    TextView nav_userEmail;
+    ImageView nav_userPhoto;
+
+    //Google
+    GoogleSignInClient mGoogleSignInClient;
+    GoogleSignInOptions gso;
+    GoogleSignInAccount googleAcc;
+
+    //Firebase
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sidemenu_user);
 
+        //Creates reference to Navigation View to enable click on events
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Get header view to enable findViewById()
+        View hView =  navigationView.getHeaderView(0);
+
+        nav_userName = hView.findViewById(R.id.nav_user_name);
+        nav_userEmail = hView.findViewById(R.id.nav_user_email);
+        nav_userPhoto = hView.findViewById(R.id.nav_user_photo);
 
         //Side bar code
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.sideMenuUser);
-
-        //Creates reference to Navigation View to enable click on events
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -52,14 +85,69 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
             navigationView.setCheckedItem(R.id.nav_home_user);
         }
 
+        //********************************* GOOGLE ********************
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        googleAcc = GoogleSignIn.getLastSignedInAccount(SideMenuUser.this);
+        googleSetNavText(googleAcc);
+        //********************************* END GOOGLE ********************
+
+
+        //********************************* FACEBOOK ********************
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        facebookSetNavText(firebaseUser);
+
+
+        //********************************* END FACEBOOK ********************
+
 
     }
 
+    public void facebookSetNavText(FirebaseUser fUser) {
 
+        if (fUser != null) {
+            String pName = fUser.getDisplayName();
+            String pEmail = fUser.getEmail();
+            Uri pPhoto = fUser.getPhotoUrl();
 
+            nav_userName.setText(pName);
+            nav_userEmail.setText(pEmail);
+            //Glide.with(this).load(pPhoto).into(nav_userPhoto);
+            Glide.with(this)
+                    .load(pPhoto)
+                    .centerCrop()
+                    .into(nav_userPhoto);
+        }
+    }
 
+    public void googleSetNavText(GoogleSignInAccount googleAcc2){
 
+        //googleAcc2 = GoogleSignIn.getLastSignedInAccount(SideMenuUser.this);
 
+        if(googleAcc2 != null){
+            String pName = googleAcc2.getDisplayName();
+            String pEmail = googleAcc2.getEmail();
+            Uri pPhoto = googleAcc2.getPhotoUrl();
+
+            nav_userName.setText(pName);
+            nav_userEmail.setText(pEmail);
+            //Glide.with(this).load(pPhoto).into(nav_userPhoto);
+            Glide.with(this)
+                    .load(pPhoto)
+                    .centerCrop()
+                    .into(nav_userPhoto);
+
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -105,10 +193,25 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(SideMenuUser.this, MainActivity.class));
+                        startActivity(new Intent(SideMenuUser.this, LoginActivity.class));
                         finish();
                     }
                 });
+
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        showMessage("Signed out");
+                        startActivity(new Intent(SideMenuUser.this, LoginActivity.class));
+                        finish();
+                    }
+                });
+    }
+
+    private void showMessage(String text) {
+
+        Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG).show();
     }
 
     //Side bar code (in case the back button is pressed)

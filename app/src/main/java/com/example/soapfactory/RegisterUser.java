@@ -214,7 +214,7 @@ public class RegisterUser extends AppCompatActivity {
     }
 
     private void updateUI() {
-        Intent home = new Intent(getApplicationContext(), MainActivity.class);
+        Intent home = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(home);
         finish();
     }
