@@ -69,14 +69,14 @@ public class Prod_RegistrationFragment extends Fragment {
                 String prodType = spnProdType.getSelectedItem().toString();
                 String prodDescription = edt_description.getText().toString();
 
-                PostProduct postProduct = new PostProduct(prodName, prodPrice, prodType, prodDescription);
+                Product product = new Product(prodName, prodPrice, prodType, prodDescription);
 
                 databaseReference = FirebaseDatabase.getInstance().getReference();
 
-                databaseReference.child("products").child(prodName).setValue(postProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                databaseReference.child("products").child(prodName).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        showMessage("Product Registered vamo ver");
+                        showMessage("Product Registered");
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -87,7 +87,7 @@ public class Prod_RegistrationFragment extends Fragment {
                     }
                 });
 
-                //insertData(postProduct);
+                //insertData(product);
             }
         });
     }

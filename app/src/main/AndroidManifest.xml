@@ -37,6 +37,10 @@
         <activity
             android:name=".RegisterUser"
             android:label="User Registration Test" />
+
+        <activity android:name=".Activity_ProductView"/>
+
+
     </application>
 
 </manifest>

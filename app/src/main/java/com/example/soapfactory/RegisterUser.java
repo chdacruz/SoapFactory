@@ -30,7 +30,7 @@ public class RegisterUser extends AppCompatActivity {
 
     ImageButton imgUserPhoto;
     static int PReqCode = 1 ;
-    static int REQUESCODE = 1 ;
+    static int REQUESCODE = 2;
     Uri pickedImgUri ;
 
     private EditText userEmail,userPassword,userPassword2,userName;
@@ -60,7 +60,16 @@ public class RegisterUser extends AppCompatActivity {
                 final String password = userPassword.getText().toString();
                 final String confirmPassword = userPassword2.getText().toString();
 
-                if( email.isEmpty() || name.isEmpty() || password.isEmpty()  || !password.equals(confirmPassword)) {
+                if(!validateFields(email, name, password, confirmPassword)){
+                    regBtn.setVisibility(View.VISIBLE);
+                    return;
+                }
+
+                else {
+                    createUserAccount(email,name,password);
+                }
+
+                /*if( email.isEmpty() || name.isEmpty() || password.isEmpty()  || !password.equals(confirmPassword)) {
                     // something goes wrong : all fields must be filled
                     // we need to display an error message
                     showMessage("Please Verify all fields") ;
@@ -72,7 +81,7 @@ public class RegisterUser extends AppCompatActivity {
                     // CreateUserAccount method will try to create the user if the email is valid
 
                     createUserAccount(email,name,password);
-                }
+                }*/
 
 
 
@@ -84,32 +93,36 @@ public class RegisterUser extends AppCompatActivity {
         imgUserPhoto.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //checkAndRequestForPermission();
+                checkAndRequestForPermission();
                 openGallery();
                 showMessage("Open gallery method called");
-                //if (Build.VERSION.SDK_INT >= 22) { checkAndRequestForPermission(); }
-                //else { openGallery(); }
             }
         });
 
-        /*imgUserPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (Build.VERSION.SDK_INT >= 22) {
-
-                    checkAndRequestForPermission();
-
-
-                }
-                else
-                {
-                    openGallery();
-                }
-
-            }
-        });*/
     }
+
+    private boolean validateFields(String email, String name, String passwd1, String passwd2){
+        boolean isValid = true;
+
+        if(email.isEmpty() || name.isEmpty() || passwd1.isEmpty()  || !passwd1.equals(passwd2)){
+            showMessage("Please Verify all fields");
+            isValid = false;
+        }
+
+        if(passwd1.length() < 6 || passwd2.length() < 6){
+            showMessage("Password must contain at least 6 characters");
+            isValid = false;
+        }
+
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            showMessage("Invalid e-mail");
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+
 
     private void checkAndRequestForPermission() {
         if (ContextCompat.checkSelfPermission(RegisterUser.this, Manifest.permission.READ_EXTERNAL_STORAGE)

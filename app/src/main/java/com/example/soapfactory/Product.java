@@ -1,23 +1,22 @@
 package com.example.soapfactory;
 
-public class PostProduct {
+public class Product {
 
     private String name, price, type, description;
 
-    public PostProduct(){
+    public Product(){
 
     }
 
-    public PostProduct(String name, String price, String type, String description) {
+    public Product(String name, String price, String type, String description) {
         this.name = name;
         this.price = price;
         this.type = type;
         this.description = description;
     }
 
-    public PostProduct(String name, String price, String description) {
+    public Product(String name, String description) {
         this.name = name;
-        this.price = price;
         this.description = description;
     }
 

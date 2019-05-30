@@ -100,11 +100,11 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
         //********************************* END GOOGLE ********************
 
 
-        //********************************* FACEBOOK ********************
+        //********************************* FACEBOOK / E-MAIL (FIREBASE) ********************
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        facebookSetNavText(firebaseUser);
+        firebaseSetNavText(firebaseUser);
 
 
         //********************************* END FACEBOOK ********************
@@ -112,7 +112,7 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    public void facebookSetNavText(FirebaseUser fUser) {
+    public void firebaseSetNavText(FirebaseUser fUser) {
 
         if (fUser != null) {
             String pName = fUser.getDisplayName();
@@ -166,6 +166,12 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
             case R.id.nav_fab_instructions_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Fab_InstructionsFragment()).commit();
+                break;
+
+            case R.id.nav_product_view_user:
+                Intent intentProduct = new Intent(this, Activity_ProductView.class);
+                startActivity(intentProduct);
+                finish();
                 break;
 
             case R.id.nav_share_user:

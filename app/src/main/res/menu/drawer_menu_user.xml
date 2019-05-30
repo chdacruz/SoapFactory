@@ -18,6 +18,11 @@
             android:id="@+id/nav_fab_instructions_user"
             android:icon="@drawable/ic_instructions"
             android:title="Soap Making Instructions"/>
+
+        <item
+            android:id="@+id/nav_product_view_user"
+            android:title="Products"
+            android:icon="@drawable/com_facebook_button_like_icon_selected"/>
     </group>
 
     <item android:title="Communicate">

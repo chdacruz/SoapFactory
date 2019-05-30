@@ -1,6 +1,7 @@
 package com.example.soapfactory;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,15 +26,19 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
-    //Sign Out Button
-    //private Button btnSignOut;
-
     //Drawer menu
     private DrawerLayout drawer;
     TextView userEmail;
     FirebaseAuth mAuth;
 
-    //FirebaseUser currentUser ;
+    //Firebase
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+
+    //Nav view fields
+    TextView nav_userName;
+    TextView nav_userEmail;
+    ImageView nav_userPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +52,16 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
 
         drawer = findViewById(R.id.sideMenuAdmin);
 
-        //currentUser = mAuth.getCurrentUser();
-
         //Creates reference to Navigation View to enable click on events
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Get header view to enable findViewById()
+        View hView =  navigationView.getHeaderView(0);
+
+        nav_userName = hView.findViewById(R.id.nav_user_name);
+        nav_userEmail = hView.findViewById(R.id.nav_user_email);
+        nav_userPhoto = hView.findViewById(R.id.nav_user_photo);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,32 +76,30 @@ public class SideMenuAdmin extends AppCompatActivity implements AdapterView.OnIt
             navigationView.setCheckedItem(R.id.nav_home_admin);
         }
 
-        //updateNavHeader();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        firebaseSetNavText(firebaseUser);
 
 
     }
 
-    /*public void updateNavHeader() {
+    public void firebaseSetNavText(FirebaseUser fUser) {
 
-        //WHERE IS nav_view?!?!?!?!??!?!?
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = headerView.findViewById(R.id.nav_user_name);
-        TextView navUserMail = headerView.findViewById(R.id.nav_user_email);
-        ImageView navUserPhoto = headerView.findViewById(R.id.nav_user_photo);
+        if (fUser != null) {
+            String pName = fUser.getDisplayName();
+            String pEmail = fUser.getEmail();
+            Uri pPhoto = fUser.getPhotoUrl();
 
-        navUserMail.setText(currentUser.getEmail());
-        navUsername.setText(currentUser.getDisplayName());
-
-        // now we will use Glide to load user image
-        // first we need to import the library
-
-        Glide.with(this).load(currentUser.getPhotoUrl()).into(navUserPhoto);
-
-
-
-
-    }*/
+            nav_userName.setText(pName);
+            nav_userEmail.setText(pEmail);
+            //Glide.with(this).load(pPhoto).into(nav_userPhoto);
+            Glide.with(this)
+                    .load(pPhoto)
+                    .centerCrop()
+                    .into(nav_userPhoto);
+        }
+    }
 
 
 

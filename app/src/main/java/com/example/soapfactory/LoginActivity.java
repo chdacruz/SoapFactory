@@ -274,7 +274,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         else if(account != null) {
-            startActivity(new Intent(LoginActivity.this, SideMenuUser.class));
+            userStartup();
         }
 
         super.onStart();
