@@ -23,15 +23,17 @@ public class RegisterUser extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     DatabaseReference db;
 
+    //EditText nameField = findViewById(R.id.edtxtName_Register);
+    EditText emailField = findViewById(R.id.edtxtEmail_Register);
+    EditText passwordField = findViewById(R.id.edtxtPassword_Register);
+    Button btnRegister = findViewById(R.id.btnRegisterEmail);
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_email);
 
-        EditText nameField = findViewById(R.id.edtxtName_Register);
-        final EditText emailField = findViewById(R.id.edtxtEmail_Register);
-        final EditText passwordField = findViewById(R.id.edtxtPassword_Register);
-        final Button btnRegister = findViewById(R.id.btnRegisterEmail);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,8 +41,6 @@ public class RegisterUser extends AppCompatActivity {
                 btnRegister.setEnabled(true);
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
-
-                Toast.makeText(getApplicationContext(), "Users successfully registered", Toast.LENGTH_SHORT).show();
 
                 createAccount(email, password);
 
@@ -55,17 +55,22 @@ public class RegisterUser extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+
+                            //db = FirebaseDatabase.getInstance().getReference();
+
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             String id = firebaseUser.getUid();
-                            //String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            //Later change this to register users with different permissions
-                            Users users = new Users(email, id);
+                            User user = new User(id, email);
+                            UserDAO userDAO = new UserDAO();
+                            userDAO.create(id, user);
 
-                            db = FirebaseDatabase.getInstance().getReference();
-                            db.child("users").child(email).setValue(users);
+                            //db = FirebaseDatabase.getInstance().getReference();
+                            //db.child("users").child(id).setValue(user);
+
+                            Toast.makeText(getApplicationContext(), "Users successfully registered", Toast.LENGTH_SHORT).show();
 
                             //Then go to login activity
-                            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                         }
 

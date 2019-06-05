@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Name:"
+            android:text="@string/full_name"
             android:textSize="18sp"
             android:textColor="@color/colorTextBlack"/>
 
@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-mail:"
+            android:text="@string/e_mail"
             android:textSize="18sp"
             android:textColor="@color/colorTextBlack"/>
 
@@ -72,8 +72,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
-            android:textSize="18dp"
+            android:text="@string/password"
+            android:textSize="18sp"
             android:textColor="@color/colorTextBlack"/>
 
         <View
@@ -101,7 +101,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="@string/register"
             android:id="@+id/btnRegisterEmail"
             android:layout_gravity="center"
             android:background="@drawable/button_round_border"
