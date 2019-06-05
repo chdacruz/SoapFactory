@@ -1,4 +1,4 @@
-package com.example.soapfactory;
+package com.example.soapfactory.models;
 
 import java.io.Serializable;
 import java.util.Objects;

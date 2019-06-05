@@ -1,4 +1,4 @@
-package com.example.soapfactory;
+package com.example.soapfactory.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.soapfactory.R;
+import com.example.soapfactory.fragments.Fragment_HomeAdmin;
+import com.example.soapfactory.fragments.Fragment_HomeUser;
+import com.example.soapfactory.fragments.Fragment_Instructions;
+import com.example.soapfactory.fragments.Fragment_ProductView;
+import com.example.soapfactory.fragments.Fragment_Profile;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -29,7 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class SideMenuUser extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class Activity_SideMenuUser extends AppCompatActivity implements AdapterView.OnItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     //Drawer menu
     private DrawerLayout drawer;
@@ -81,7 +87,7 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
         if(savedInstanceState == null) {
             //Open a fragment on start
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragmentAdmin()).commit();
+                    new Fragment_HomeUser()).commit();
             navigationView.setCheckedItem(R.id.nav_home_user);
         }
 
@@ -95,7 +101,7 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        googleAcc = GoogleSignIn.getLastSignedInAccount(SideMenuUser.this);
+        googleAcc = GoogleSignIn.getLastSignedInAccount(Activity_SideMenuUser.this);
         googleSetNavText(googleAcc);
         //********************************* END GOOGLE ********************
 
@@ -131,7 +137,7 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
 
     public void googleSetNavText(GoogleSignInAccount googleAcc2){
 
-        //googleAcc2 = GoogleSignIn.getLastSignedInAccount(SideMenuUser.this);
+        //googleAcc2 = GoogleSignIn.getLastSignedInAccount(Activity_SideMenuUser.this);
 
         if(googleAcc2 != null){
             String pName = googleAcc2.getDisplayName();
@@ -154,24 +160,23 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
         switch (menuItem.getItemId()){
             case R.id.nav_home_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragmentUser()).commit();
+                        new Fragment_HomeUser()).commit();
                 break;
 
             case R.id.nav_profile_user:
                 //Here the profile fragment is the same used for admin
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new Fragment_Profile()).commit();
                 break;
 
             case R.id.nav_fab_instructions_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Fab_InstructionsFragment()).commit();
+                        new Fragment_Instructions()).commit();
                 break;
 
             case R.id.nav_product_view_user:
-                Intent intentProduct = new Intent(this, Activity_ProductView.class);
-                startActivity(intentProduct);
-                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Fragment_ProductView()).commit();
                 break;
 
             case R.id.nav_share_user:
@@ -199,7 +204,7 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(SideMenuUser.this, LoginActivity.class));
+                        startActivity(new Intent(Activity_SideMenuUser.this, Activity_Login.class));
                         finish();
                     }
                 });
@@ -209,7 +214,7 @@ public class SideMenuUser extends AppCompatActivity implements AdapterView.OnIte
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         showMessage("Signed out");
-                        startActivity(new Intent(SideMenuUser.this, LoginActivity.class));
+                        startActivity(new Intent(Activity_SideMenuUser.this, Activity_Login.class));
                         finish();
                     }
                 });

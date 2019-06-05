@@ -1,4 +1,4 @@
-package com.example.soapfactory;
+package com.example.soapfactory.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,12 +12,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.soapfactory.models.Product;
+import com.example.soapfactory.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Prod_RegistrationFragment extends Fragment {
+public class Fragment_ProductRegistration extends Fragment {
 
     //Variables to save the data to the database
     EditText edt_prodName, edt_prodPrice, edt_description;

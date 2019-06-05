@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".activities.Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,13 +20,13 @@
         </activity>
 
         <activity
-            android:name=".SideMenuAdmin"
+            android:name=".activities.Activity_SideMenuAdmin"
             android:label="@string/home_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SideMenuUser"
+            android:name=".activities.Activity_SideMenuUser"
             android:label="User Menu" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.Activity_Login">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,10 +35,11 @@
             -->
         </activity>
         <activity
-            android:name=".RegisterUser"
+            android:name=".activities.Activity_RegisterUser"
             android:label="User Registration Test" />
 
-        <activity android:name=".Activity_ProductView"/>
+        <!-- This is a fragment now
+        <activity android:name=".fragments.Fragment_ProductView"/> -->
 
 
     </application>

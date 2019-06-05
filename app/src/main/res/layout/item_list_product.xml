@@ -24,8 +24,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/rv_prodType"
+            android:text="Sample product type" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/rv_prodDescription"
             android:text="This is an example of the product description"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_prodPrice"
+            android:text="000000000000000000000000" />
 
 
 

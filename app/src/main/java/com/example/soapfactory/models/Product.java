@@ -1,12 +1,10 @@
-package com.example.soapfactory;
+package com.example.soapfactory.models;
 
 public class Product {
 
     private String name, price, type, description;
 
-    public Product(){
-
-    }
+    public Product(){ } // Need for firebase?
 
     public Product(String name, String price, String type, String description) {
         this.name = name;

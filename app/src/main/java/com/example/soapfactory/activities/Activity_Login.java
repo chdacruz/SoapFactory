@@ -1,4 +1,4 @@
-package com.example.soapfactory;
+package com.example.soapfactory.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.soapfactory.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -30,10 +31,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-public class LoginActivity extends AppCompatActivity {
+public class Activity_Login extends AppCompatActivity {
 
     private static final int GOOGLE_SIGN_CODE = 666; // ANy number you'd like
     private static final int FACEBOOK_SIGN_CODE = 667;
@@ -157,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentRegister = new Intent(LoginActivity.this, RegisterUser.class);
+                Intent intentRegister = new Intent(Activity_Login.this, Activity_RegisterUser.class);
                 startActivity(intentRegister);
             }
         });
@@ -249,12 +248,12 @@ public class LoginActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            startActivity(new Intent(LoginActivity.this, SideMenuUser.class));
+            startActivity(new Intent(Activity_Login.this, Activity_SideMenuUser.class));
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("Google Sign In Error", "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_LONG).show();
+            Toast.makeText(Activity_Login.this, "Failed", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -282,13 +281,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void admStartup(){
-        Intent intentAdmin = new Intent(this, SideMenuAdmin.class);
+        Intent intentAdmin = new Intent(this, Activity_SideMenuAdmin.class);
         startActivity(intentAdmin);
         finish();
     }
 
     private void userStartup(){
-        Intent intentUser = new Intent(this, SideMenuUser.class);
+        Intent intentUser = new Intent(this, Activity_SideMenuUser.class);
         startActivity(intentUser);
         finish();
     }
