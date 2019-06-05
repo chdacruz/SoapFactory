@@ -6,111 +6,74 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 //Later change this to a fragment
-public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.ProductViewHolder>{
+public class ProductViewAdapter extends RecyclerView.Adapter<ProductViewAdapter.ViewHolder>{
 
     Context mContext;
     //List<Product> mName;
     //List<Product> mDescription;
     //List<Product> mData;
     //List<Product> mDataFiltered;
-    private ArrayList<String> mName;
-    private ArrayList<String> mDescription;
+    private ArrayList<String> mNames;
+    private ArrayList<String> mDescriptions;
 
-    public ProductViewAdapter(Context mContext, ArrayList<String> mName, ArrayList<String> mDescription) {
-        this.mContext = mContext;
-        this.mName = mName;
-        this.mDescription = mDescription;
-    }
-
-    public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        public TextView prodName, prodDescription;
-        public ProductViewHolder(View itemView) {
-            super(itemView);
-            prodName = itemView.findViewById(R.id.rv_prodName);
-            prodDescription = itemView.findViewById(R.id.rv_prodDescription);
-        }
+    public ProductViewAdapter(Context context, ArrayList<String> name, ArrayList<String> description) {
+        this.mContext = context;
+        this.mNames = name;
+        this.mDescriptions = description;
     }
 
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public ProductViewAdapter.ProductViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                   int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_product, parent, false);
-        ProductViewHolder prodHolder = new ProductViewHolder(view);
-        return prodHolder;
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewAdapter.ProductViewHolder productViewHolder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewAdapter.ViewHolder holder, final int position) {
         //productViewHolder.prodName.setText(mDataFiltered.get(position).getName());
         //productViewHolder.prodDescription.setText(mDataFiltered.get(position).getDescription());
-        productViewHolder.prodName.setText(mName.get(position));
-        productViewHolder.prodDescription.setText(mDescription.get(position));
+        holder.prodName.setText(mNames.get(position));
+        holder.prodDescription.setText(mDescriptions.get(position));
 
+        holder.parentLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+            }
 
+        });
     }
 
     //Defines the size of the recycleview list
     @Override
     public int getItemCount() {
-        return mName.size();
+        return mNames.size();
     }
 
-    //This is being implemented because the recycleView is returning blank
-    //Probably has to do with List<Product> instead of ArrayList<String>
-    /*@Override
-    public Filter getFilter() {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView prodName, prodDescription;
+        //RelativeLayout parentLayout;
+        LinearLayout parentLayout;
 
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
+        public ViewHolder(View itemView) {
+            super(itemView);
+            prodName = itemView.findViewById(R.id.rv_prodName);
+            prodDescription = itemView.findViewById(R.id.rv_prodDescription);
+            parentLayout = itemView.findViewById(R.id.rv_containerLayout);
+        }
+    }
 
-                String Key = constraint.toString();
-                if (Key.isEmpty()) {
-
-                    mDataFiltered = mData ;
-
-                }
-                else {
-                    List<Product> lstFiltered = new ArrayList<>();
-                    for (Product row : mData) {
-
-                        if (row.getName().toLowerCase().contains(Key.toLowerCase())){
-                            lstFiltered.add(row);
-                        }
-
-                    }
-
-                    mDataFiltered = lstFiltered;
-
-                }
-
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values= mDataFiltered;
-                return filterResults;
-
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-
-                mDataFiltered = (List<Product>) results.values;
-                notifyDataSetChanged();
-
-            }
-        };
-    }*/
 
 
 }

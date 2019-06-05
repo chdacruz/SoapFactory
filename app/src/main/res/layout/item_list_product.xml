@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Activity_ProductView">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:paddingBottom="16dp"
+        android:id="@+id/rv_containerLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_screen">
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_prodName"
+            android:text="Sample Product Name"
+            android:textColor="#000"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_prodDescription"
+            android:text="This is an example of the product description"/>
 
 
-    </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
 
 </LinearLayout>

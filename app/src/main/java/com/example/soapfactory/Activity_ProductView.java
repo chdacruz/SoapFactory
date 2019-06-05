@@ -16,16 +16,29 @@ public class Activity_ProductView extends AppCompatActivity {
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mDescriptions = new ArrayList<>();
 
+    //RecyclerView
+    //RecyclerView productRecyclerview;
+    //ProductViewAdapter productAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_list_product);
+        setContentView(R.layout.activity_list_product);
+
+        //init view
+        //productRecyclerview = findViewById(R.id.rv_screen);
+
+        //adapter init and setup
+        //productAdapter = new ProductViewAdapter(this, mNames, mDescriptions);
+        //productRecyclerview.setAdapter(productAdapter);
+        //productRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+
 
         initValues();
 
     }
 
-    private void initValues() {
+   private void initValues() {
 
         //mData.add(new Product("1", "asdfkjahsdfkasdioufasdf"));
         //mData.add(new Product("2", "opppppppppppp"));
@@ -35,6 +48,8 @@ public class Activity_ProductView extends AppCompatActivity {
         mDescriptions.add("asdfhasodifuhasdf");
         mNames.add("2");
         mDescriptions.add("adsflkasudfh");
+        mNames.add("3");
+        mDescriptions.add("zsdasffffffffffffffffff");
 
         initRecycleView();
     }
