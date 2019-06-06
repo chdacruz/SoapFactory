@@ -146,7 +146,7 @@ public class Activity_RegisterUser extends AppCompatActivity {
             openGallery();
 
     }
-
+    ////////////////////////
     public void openGallery(){
 
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
