@@ -26,14 +26,11 @@ public class Fragment_ProductRegistration extends Fragment {
     Spinner spnProdType;
     Button btn_insert;
 
-    //Firebase
+    //Spinner adapter
+    ArrayAdapter<CharSequence> adapter;
 
-    //FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    //@Nullable
-    //    @Override
-    //    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -55,7 +52,7 @@ public class Fragment_ProductRegistration extends Fragment {
         edt_description = view.findViewById(R.id.frag_ProdDescription);
         btn_insert = view.findViewById(R.id.frag_btn_RegisterProduct);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.prod_type,
+        adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.prod_type,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnProdType.setAdapter(adapter);
@@ -71,27 +68,39 @@ public class Fragment_ProductRegistration extends Fragment {
                 String prodType = spnProdType.getSelectedItem().toString();
                 String prodDescription = edt_description.getText().toString();
 
-                Product product = new Product(prodName, prodPrice, prodType, prodDescription);
+                if(prodName.isEmpty() || prodPrice.isEmpty() || prodDescription.isEmpty() || prodType.isEmpty()){
+                    showMessage("Please verify all fields");
+                }
 
-                databaseReference = FirebaseDatabase.getInstance().getReference();
+                else {
+                    Product product = new Product(prodName, prodPrice, prodType, prodDescription);
 
-                databaseReference.child("products").child(prodName).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        showMessage("Product Registered");
+                    databaseReference = FirebaseDatabase.getInstance().getReference();
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        showMessage(e.getMessage());
+                    databaseReference.child("products").child(prodName).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            showMessage("Product Registered");
+                            clearFields();
 
-                    }
-                });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            showMessage(e.getMessage());
 
-                //insertData(product);
+                        }
+                    });
+                }
             }
         });
+    }
+
+    private void clearFields(){
+        edt_prodName.setText("");
+        edt_prodPrice.setText("");
+        edt_description.setText("");
+        spnProdType.setSelection(0);
     }
 
     private void showMessage(String message) {

@@ -13,16 +13,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.soapfactory.R;
+import com.example.soapfactory.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -32,12 +37,17 @@ public class Activity_RegisterUser extends AppCompatActivity {
     ImageButton imgUserPhoto;
     static int PReqCode = 1 ;
     static int REQUESCODE = 2;
+    static String COMMON_USER = "2";
     Uri pickedImgUri ;
 
     private EditText userEmail,userPassword,userPassword2,userName;
     private Button regBtn;
 
     private FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
+
+    //ProgressBar
+    ProgressBar registerProgressBar;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +59,16 @@ public class Activity_RegisterUser extends AppCompatActivity {
         userPassword2 = findViewById(R.id.editText_registerConfirmPassword);
         regBtn = findViewById(R.id.btn_Register);
 
+        registerProgressBar = findViewById(R.id.register_user_progress_bar);
+        registerProgressBar.setVisibility(View.INVISIBLE);
+
         mAuth = FirebaseAuth.getInstance();
 
         regBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 regBtn.setVisibility(View.INVISIBLE);
+                registerProgressBar.setVisibility(View.VISIBLE);
 
                 final String email = userEmail.getText().toString();
                 final String name = userName.getText().toString();
@@ -63,29 +77,13 @@ public class Activity_RegisterUser extends AppCompatActivity {
 
                 if(!validateFields(email, name, password, confirmPassword)){
                     regBtn.setVisibility(View.VISIBLE);
+                    registerProgressBar.setVisibility(View.INVISIBLE);
                     return;
                 }
 
                 else {
                     createUserAccount(email,name,password);
                 }
-
-                /*if( email.isEmpty() || name.isEmpty() || password.isEmpty()  || !password.equals(confirmPassword)) {
-                    // something goes wrong : all fields must be filled
-                    // we need to display an error message
-                    showMessage("Please Verify all fields") ;
-                    regBtn.setVisibility(View.VISIBLE);
-
-                }
-                else {
-                    // everything is ok and all fields are filled now we can start creating user account
-                    // CreateUserAccount method will try to create the user if the email is valid
-
-                    createUserAccount(email,name,password);
-                }*/
-
-
-
             }
         });
 
@@ -96,7 +94,6 @@ public class Activity_RegisterUser extends AppCompatActivity {
             public void onClick(View view){
                 checkAndRequestForPermission();
                 openGallery();
-                showMessage("Open gallery method called");
             }
         });
 
@@ -106,7 +103,7 @@ public class Activity_RegisterUser extends AppCompatActivity {
         boolean isValid = true;
 
         if(email.isEmpty() || name.isEmpty() || passwd1.isEmpty()  || !passwd1.equals(passwd2)){
-            showMessage("Please Verify all fields");
+            showMessage("Please verify all fields");
             isValid = false;
         }
 
@@ -155,6 +152,22 @@ public class Activity_RegisterUser extends AppCompatActivity {
 
     }
 
+    public void createInDatabase(User user){
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child("users").child(user.getId()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                showMessage(e.getMessage());
+            }
+        });
+    }
+
 
     public void createUserAccount(String email, final String name, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -162,8 +175,15 @@ public class Activity_RegisterUser extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                            String id = firebaseUser.getUid();
+                            String email = firebaseUser.getEmail();
+                            String type = COMMON_USER;
+                            User user = new User(id, email, type);
+                            createInDatabase(user);
+
                             // user account created successfully
-                            showMessage("Account created");
+                            showMessage("Creating account");
                             // after we created user account we need to update his profile picture and name
                             updateUserInfo( name ,pickedImgUri,mAuth.getCurrentUser());
 
@@ -211,7 +231,7 @@ public class Activity_RegisterUser extends AppCompatActivity {
 
                                         if (task.isSuccessful()) {
                                             // user info updated successfully
-                                            showMessage("Register Complete");
+                                            showMessage("Creation completed");
                                             updateUI();
                                         }
 

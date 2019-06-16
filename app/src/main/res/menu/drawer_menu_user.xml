@@ -31,10 +31,6 @@
                 android:id="@+id/nav_share_user"
                 android:icon="@drawable/ic_share"
                 android:title="Share" />
-            <item
-                android:id="@+id/nav_send_user"
-                android:icon="@drawable/ic_send"
-                android:title="Send" />
         </menu>
     </item>
 
@@ -42,7 +38,7 @@
         <menu>
             <item
                 android:id="@+id/nav_sign_out_user"
-                android:icon="@drawable/sign_out"
+                android:icon="@drawable/sign_out2x"
                 android:title="Sign out" />
 
         </menu>

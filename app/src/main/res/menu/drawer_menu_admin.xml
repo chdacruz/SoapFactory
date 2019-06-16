@@ -20,16 +20,28 @@
             android:title="Product Registration" />
 
         <item
-            android:id="@+id/nav_fab_instructions_admin"
+            android:id="@+id/nav_product_view_admin"
+            android:title="Products"
+            android:icon="@drawable/com_facebook_button_like_icon_selected"/>
+
+        <item
+            android:id="@+id/nav_edit_fab_instructions_admin"
             android:icon="@drawable/ic_instructions"
             android:title="Edit Soap Making Instructions"/>
+
+        <item
+            android:id="@+id/nav_view_fab_instructions_admin"
+            android:icon="@drawable/ic_view_instructions"
+            android:title="Soap Making Instructions"/>
+
     </group>
 
     <item android:title="Options">
         <menu>
             <item
                 android:id="@+id/nav_sign_out_admin"
-                android:icon="@drawable/sign_out"
+
+                android:icon="@drawable/sign_out2x"
                 android:title="Sign out" />
 
         </menu>

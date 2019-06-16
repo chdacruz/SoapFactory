@@ -20,8 +20,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.soapfactory.R;
 import com.example.soapfactory.fragments.Fragment_HomeAdmin;
-import com.example.soapfactory.fragments.Fragment_Instructions;
+import com.example.soapfactory.fragments.Fragment_InstructionEdit;
+import com.example.soapfactory.fragments.Fragment_InstructionView;
 import com.example.soapfactory.fragments.Fragment_ProductRegistration;
+import com.example.soapfactory.fragments.Fragment_ProductView;
 import com.example.soapfactory.fragments.Fragment_Profile;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -108,7 +110,7 @@ public class Activity_SideMenuAdmin extends AppCompatActivity implements Adapter
 
 
 
-    //Implementing method to call fragments
+    //Implementing method to call layout_fragments
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
@@ -125,11 +127,19 @@ public class Activity_SideMenuAdmin extends AppCompatActivity implements Adapter
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Fragment_ProductRegistration()).commit();
                 break;
-            case R.id.nav_fab_instructions_admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Fragment_Instructions()).commit();
-                break;
 
+            case R.id.nav_product_view_admin:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Fragment_ProductView()).commit();
+                break;
+            case R.id.nav_edit_fab_instructions_admin:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Fragment_InstructionEdit()).commit();
+                break;
+            case R.id.nav_view_fab_instructions_admin:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Fragment_InstructionView()).commit();
+                break;
             case R.id.nav_sign_out_admin:
                 signOut();
                 break;

@@ -19,9 +19,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.soapfactory.R;
-import com.example.soapfactory.fragments.Fragment_HomeAdmin;
 import com.example.soapfactory.fragments.Fragment_HomeUser;
-import com.example.soapfactory.fragments.Fragment_Instructions;
+import com.example.soapfactory.fragments.Fragment_InstructionView;
 import com.example.soapfactory.fragments.Fragment_ProductView;
 import com.example.soapfactory.fragments.Fragment_Profile;
 import com.firebase.ui.auth.AuthUI;
@@ -139,7 +138,18 @@ public class Activity_SideMenuUser extends AppCompatActivity implements AdapterV
 
         //googleAcc2 = GoogleSignIn.getLastSignedInAccount(Activity_SideMenuUser.this);
 
-        if(googleAcc2 != null){
+        /*GoogleSignInAccount googleSignInAccount = getIntent().getParcelableExtra("asda");
+
+        Uri pPhoto = googleSignInAccount.getPhotoUrl();
+        //Picasso.get().load(googleSignInAccount.getPhotoUrl()).centerInside().fit().into(profileImage);
+        nav_userName.setText(googleSignInAccount.getDisplayName());
+        nav_userEmail.setText(googleSignInAccount.getEmail());
+        Glide.with(this)
+                .load(pPhoto)
+                .centerCrop()
+                .into(nav_userPhoto);*/
+
+        if (googleAcc2 != null){
             String pName = googleAcc2.getDisplayName();
             String pEmail = googleAcc2.getEmail();
             Uri pPhoto = googleAcc2.getPhotoUrl();
@@ -171,7 +181,7 @@ public class Activity_SideMenuUser extends AppCompatActivity implements AdapterV
 
             case R.id.nav_fab_instructions_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Fragment_Instructions()).commit();
+                        new Fragment_InstructionView()).commit();
                 break;
 
             case R.id.nav_product_view_user:
@@ -181,9 +191,6 @@ public class Activity_SideMenuUser extends AppCompatActivity implements AdapterV
 
             case R.id.nav_share_user:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_send_user:
-                Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.nav_sign_out_user:

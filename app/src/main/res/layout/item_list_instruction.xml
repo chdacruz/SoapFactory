@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:padding="8dp"
     android:animateLayoutChanges="true">
 
     <RelativeLayout
         android:paddingBottom="16dp"
-        android:id="@+id/rv_productContainerLayout"
+        android:id="@+id/rv_instructionContainerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,10 +23,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rv_prodName"
-            android:text="Sample Product Name"
-            android:textStyle="bold"
+            android:id="@+id/rv_instructionTitle"
+            android:text="Sample Instruction Title"
             android:textColor="#000"
+            android:textStyle="bold"
             android:textSize="16sp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -35,27 +35,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rv_prodType"
-            android:text="Sample product type"
-            android:layout_below="@+id/rv_prodName"
+            android:id="@+id/rv_instructionContent"
+            android:text="Sample fabrication instructions"
+            android:layout_below="@+id/rv_instructionTitle"
             android:layout_marginTop="8dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rv_prodDescription"
-            android:text="This is an example of the product description"
-            android:layout_below="@+id/rv_prodType"
-            android:lineSpacingExtra="8dp"
-            android:layout_marginTop="2dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rv_prodPrice"
-            android:text="000000000000000000000000"
-            android:layout_below="@+id/rv_prodDescription"
-            android:layout_marginTop="2dp"/>
 
     </RelativeLayout>
 
