@@ -25,6 +25,7 @@ import com.example.soapfactory.fragments.Fragment_InstructionView;
 import com.example.soapfactory.fragments.Fragment_ProductRegistration;
 import com.example.soapfactory.fragments.Fragment_ProductView;
 import com.example.soapfactory.fragments.Fragment_Profile;
+import com.example.soapfactory.fragments.VideoInstructions;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -142,6 +143,11 @@ public class Activity_SideMenuAdmin extends AppCompatActivity implements Adapter
                 break;
             case R.id.nav_sign_out_admin:
                 signOut();
+                break;
+
+            case R.id.nav_view_video_instructions_admin:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new VideoInstructions()).commit();
                 break;
 
             /*case R.id.nav_share:

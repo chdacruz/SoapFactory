@@ -34,6 +34,11 @@
             android:icon="@drawable/ic_view_instructions"
             android:title="Soap Making Instructions"/>
 
+        <item
+            android:id="@+id/nav_view_video_instructions_admin"
+            android:icon="@drawable/ic_view_instructions"
+            android:title="Video Instructions"/>
+
     </group>
 
     <item android:title="Options">
