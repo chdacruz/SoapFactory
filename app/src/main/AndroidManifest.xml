@@ -39,7 +39,7 @@
             android:label="User Registration Test" />
 
         <!-- This is a fragment now
-        <activity android:name=".fragments.Fragment_ProductView"/> -->
+        <activity android:name=".layout_fragments.Fragment_ProductView"/> -->
 
 
     </application>

@@ -5,4 +5,5 @@
     <color name="colorPrimary">#0000FF</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="colorTextBlack">#000000</color>
+    <color name="card_background">#F6F6F6</color>
 </resources>

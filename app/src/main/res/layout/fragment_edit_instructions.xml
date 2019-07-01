@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/imageView_ProdRegist"
+        android:layout_width="118dp"
+        android:layout_height="113dp"
+        android:layout_gravity="center"
+        android:src="@drawable/instruction_book" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_weight="0"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/txtInstruction_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Instruction Title"
+            android:ems="10"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:textColorHint="@android:color/darker_gray"
+            android:textStyle="bold|italic"
+            android:background="@drawable/edit_text_border"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/txtView_Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Description"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextBlack"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+
+        <EditText
+            android:id="@+id/txtInstruction_Description"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:hint="Instruction Description"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:textStyle="bold|italic"
+            android:background="@drawable/edit_text_border"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_weight="0"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_RegisterInstruction"
+        android:layout_gravity="center"
+        android:background="@drawable/button_round_border"
+        android:textColor="@color/colorTextWhite"
+        android:text="Register" />
+
+    <!--<ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/vector_2"
+        android:layout_gravity="bottom"
+        /> -->
+
+</LinearLayout>
