@@ -1,10 +1,5 @@
-# SoapFactory
+# Amelia's Soap Factory
 
-Problems encountered:
+App developed for the Durban University of Technology in South Africa. 
 
--Product Registration Screen crashes the app when openned.
-  Strings checked and no ambiguity was found.
-  You can access this screen by using the e-mail login option
-   
--User Registration Screen crashes the app when openned.
-  Strings checked and no ambiguity was found.
+Still in development.
